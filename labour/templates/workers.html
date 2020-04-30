@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+  {{ work.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Works</a></li>
+  <li class="breadcrumb-item active">{{ work.name }}</li>
+{% endblock %}
+
+{% block content %}
+  <div class="mb-4">
+    <a href="{% url 'new_worker' work.pk %}" class="btn btn-primary">New worker</a>
+  </div>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Worker</th>
+        <th>Full Name</th>
+        <th>Created By</th>
+        <th>Future</th>
+        <th>Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for worker in work.workers.all %}
+        <tr>
+		<td><a href="{% url 'worker_assignments' work.pk worker.pk %}">{{ worker.short_name }}</a></td>
+	    <td>{{ worker.full_Name }}</td>
+          <td>{{ worker.created_by.username }}</td>
+          <td>0</td>
+          <td>{{ worker.last_updated }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

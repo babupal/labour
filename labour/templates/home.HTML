@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Works</li>
+{% endblock %}
+
+{% block content %}
+	<table class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Work</th> 	
+          <th>Workers</th>
+          <th>Assignments</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+	<tbody>
+        {% for work in works %}
+          <tr>
+            <td>
+		<a href="{% url 'work_workers' work.pk %}">{{ work.name }}</a>
+        <small class="text-muted d-block">{{ work.description }}</small>
+            </td>
+            <td class="align-middle">0</td>
+            <td class="align-middle">0</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+	</table>
+{% endblock %}
+

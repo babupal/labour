@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ worker.full_Name }}{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Works</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'work_workers' worker.work.pk %}">{{ worker.work.name }}</a></li>
+  <li class="breadcrumb-item active">{{ worker.full_Name }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="#" class="btn btn-primary" role="button">Reply</a>
+  </div>
+
+<table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Assignment From </th>
+        <th>To</th>
+        <th>Created By</th>
+        <th>Count</th>
+        <th>Last Update</th>
+	  <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for assignment in worker.assignments.all %}
+        <tr>
+          <td>{{ assignment.asg_start_date}}</td>
+	     <td>{{ assignment.asg_end_date}}</td>
+          <td>{{ assignment.created_by.username }}</td>
+          <td>{{ assignment.created_by.assignments.count }}</td>
+          <td>{{ assignment.created_at }}</td>
+		<td> {% if assignment.created_by == user %}
+              <div class="mt-3">
+                <a href="#" class="btn btn-primary btn-sm" role="button">Edit</a>
+              </div>
+            {% endif %}
+        </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock	 %}

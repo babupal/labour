@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Start a New Worker{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Works</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'work_workers' work.pk %}">{{ work.name }}</a></li>
+  <li class="breadcrumb-item active">New worker</li>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_short_name">Short_Name</label>
+      <input type="text" 
+		class="form-control" 
+			id="id_short_name" name="short_name">
+    </div>
+    <div class="form-group">
+      <label for="id_full_Name">Full_Name</label>
+      <textarea class="form-control" 
+		id="id_full_name" 
+		name="full_Name" rows="2">
+	</textarea>
+    </div>
+     <div class="form-group">
+      <label for="id_asg_start_date">Assignment Start</label>
+      <input type="date" 
+		class="form-control" 		
+		id="id_asg_start_date" 
+		name="asg_start_date">
+	</div>
+     <div class="form-group">
+      <label for="id_asg_end_date">Assignment End</label>
+      <input type="date" 
+		class="form-control" 	
+		id="id_asg_end_date" 
+		name="asg_end_date">
+	</div>
+     <div class="form-group">
+      <label for="id_aadhaar_number">Aadhaar Number</label>
+      <input type="text" 
+		class="form-control" 	
+		id="aadhaar_number" 
+		name="aadhaar_number">
+	</div>
+     <div class="form-group">
+      <label for="id_telephone_number">Telephone Number</label>
+      <input type="text" 
+		class="form-control" 	
+		id="telephone_number" 
+		name="telephone_number">
+	</div>
+
+	<div class="form-group">
+      <label for="id_local_address">Local Address</label>
+      <textarea class="form-control" 
+		id="id_local_address" 
+		name="local_address" rows="2">
+	</textarea>
+    </div>
+	<div class="form-group">
+      <label for="id_permanent_address">Permanent Address</label>
+      <textarea class="form-control" 
+		id="id_permanent_address" 
+		name="permanent_address" rows="2">
+	</textarea>
+    </div>
+	<div class="form-group">
+      <label for="id_dob">Date of Birth</label>
+      <input type="date" 
+		class="form-control" 		
+		id="id_dob" 
+		name="dob">
+	</div>
+   	<button type="submit" class="btn btn-success">		Assignment
+	</button>
+  </form>
+{% endblock %}

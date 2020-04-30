@@ -1,0 +1,12 @@
+
+>>> from django.contrib.auth.models import User
+>>> from works.models import Work
+>>> wrkr=Worker(short_name='Gopi',full_Name='Gopichand',created_by=User.objects.first(),work=Work.objects.first())
+>>> wrkr.save()
+>>> wrkr.id
+14
+from works.models import Worker, Assignments
+>>> asg=Assignment(asg_start_date=datetime.today(),worker=Worker.objects.first(),created_by=User.objects.first())
+>>> asg.save()
+>>> asg.id	
+8
