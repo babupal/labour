@@ -11,9 +11,10 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="mb-4">
-    <a href="#" class="btn btn-primary" role="button">Reply</a>
-  </div>
+    <a href="{% url 'add_assignment_worker' worker.work.pk work.pk %}" class="btn btn-primary" role="button">Add an Assignment</a>
+</div>
 
 <table class="table">
     <thead class="thead-inverse">
@@ -26,6 +27,7 @@
 	  <th>Action</th>
       </tr>
     </thead>
+
     <tbody>
       {% for assignment in worker.assignments.all %}
         <tr>
@@ -35,11 +37,13 @@
           <td>{{ assignment.created_by.assignments.count }}</td>
           <td>{{ assignment.created_at }}</td>
 		<td> {% if assignment.created_by == user %}
-              <div class="mt-3">
-                <a href="#" class="btn btn-primary btn-sm" role="button">Edit</a>
-              </div>
-            {% endif %}
-        </td>
+  			<div class="mt-3">
+    			<a href="{% url 'edit_assignment' assignment.worker.work.pk assignment.worker.pk assignment.pk %}"
+       class="btn btn-primary btn-sm"
+       role="button">Edit</a>
+  		</div>
+			{% endif %}
+        	</td>
         </tr>
       {% endfor %}
     </tbody>

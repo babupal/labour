@@ -12,23 +12,27 @@
   <div class="mb-4">
     <a href="{% url 'new_worker' work.pk %}" class="btn btn-primary">New worker</a>
   </div>
+
   <table class="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Worker</th>
+	  <th>Short Name</th>
         <th>Full Name</th>
         <th>Created By</th>
-        <th>Future</th>
+        <th>Assignments</th>
+        <th>Views</th>
         <th>Last Update</th>
       </tr>
     </thead>
+
     <tbody>
-      {% for worker in work.workers.all %}
+      {% for worker in workers %}
         <tr>
 		<td><a href="{% url 'worker_assignments' work.pk worker.pk %}">{{ worker.short_name }}</a></td>
 	    <td>{{ worker.full_Name }}</td>
           <td>{{ worker.created_by.username }}</td>
-          <td>0</td>
+          <td>{{ worker.assignments }}</td>
+		<td>{{ worker.views }}</td>
           <td>{{ worker.last_updated }}</td>
         </tr>
       {% endfor %}

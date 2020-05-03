@@ -3,13 +3,13 @@
 # Create your models here.
 
 from django.db import models
-
 from django.contrib.auth.models import User
 
 
 class Work(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.CharField(max_length=100)
+    
     def __str__(self):
         return self.name
 
@@ -26,10 +26,11 @@ class Worker(models.Model):
     telephone_number = models.CharField(max_length=10)
     local_address = models.CharField(max_length=255,null=True)
     permanent_address = models.CharField(max_length=255,null=True)
-    last_updated = models.DateTimeField(auto_now=True)
+    last_updated = models.DateTimeField(auto_now_add=True)
     dob = models.DateField(null=True)
     work = models.ForeignKey(Work,on_delete = models.PROTECT, related_name='workers')
     created_by = models.ForeignKey(User, on_delete = models.PROTECT, related_name='workers')
+    views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.short_name

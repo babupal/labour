@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit assignment{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Works</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'work_workers' assignment.worker.work.pk %}">{{ assignment.worker.work.name }}</a></li>
+  <li class="breadcrumb-item">
+	<a href="{% url 'worker_assignments' assignment.worker.work.pk assignment.worker.pk %}">
+	{{ assignment.worker.asg_start_date }}
+	</a>
+  </li>
+  <li class="breadcrumb-item active">Edit assignment</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="mb-4" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success">Save changes</button>
+    <a href="{% url 'worker_assignments' assignment.worker.work.pk assignment.worker.pk %}" class="btn btn-outline-secondary" role="button">Cancel</a>
+  </form>
+{% endblock %}

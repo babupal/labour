@@ -8,11 +8,12 @@ from ..views import worker_assignments
 class WorkerAssignmentsTests(TestCase):
     def setUp(self):
         work = Work.objects.create(name='Tailor', description='Tailor.')
+        print("work created with id"+str(work.id))
         user = User.objects.create_user(username='john', email='john@doe.com', password='123')
         worker = Worker.objects.create(
 ##            subject='Hello, world', board=board, starter=user
             short_name = 'Manoj',
-            full_Name = 'Tailor Manot',
+            full_Name = 'Tailor Manoj',
             aadhaar_number = '123456789021',
             telephone_number = '1234567890',
             local_address = 'Here, very Near',
@@ -20,7 +21,8 @@ class WorkerAssignmentsTests(TestCase):
             work = work,
             created_by = user
             )
-        Assignment.objects.create(
+        print("Worker Created with " + str(worker.id))
+        assignment=Assignment.objects.create(
 ##            message='Lorem ipsum dolor sit amet', topic=topic, created_by=user
             worker=worker,
             asg_start_date='2020-04-29',#date.today(),
@@ -30,6 +32,7 @@ class WorkerAssignmentsTests(TestCase):
             created_by=user,
             updated_by=user
             )
+        print("Assignment Created with " + str(assignment.id))
         url = reverse('worker_assignments', kwargs={'pk': work.pk, 'worker_pk': worker.pk})
         self.response = self.client.get(url)
 

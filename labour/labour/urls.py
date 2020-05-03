@@ -49,6 +49,11 @@ urlpatterns = [
     
     url(r'^works/(?P<pk>\d+)/$', views.work_workers, name='work_workers'),
     url(r'^works/(?P<pk>\d+)/new/$', views.new_worker, name='new_worker'),
-    url(r'^works/(?P<pk>\d+)/workers/(?P<worker_pk>\d+)/$', views.worker_assignments, name='worker_assignments'),
+    url(r'^works/(?P<pk>\d+)/workers/(?P<worker_pk>\d+)/$',
+        views.worker_assignments, name='worker_assignments'),
+    url(r'^works/(?P<pk>\d+)/workers/(?P<worker_pk>\d+)/add_assignment/$',
+        views.add_assignment_worker, name='add_assignment_worker'),
+    url(r'^works/(?P<pk>\d+)/workers/(?P<worker_pk>\d+)/assignments/(?P<assignment_pk>\d+)/edit/$',
+        views.AssignmentUpdateView.as_view(), name='edit_assignment'),
     url(r'^admin/', admin.site.urls),
 ]

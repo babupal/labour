@@ -11,7 +11,7 @@
           <th>Work</th> 	
           <th>Assignments</th>
           <th>Workers</th>
-          <th>Last Assignment</th>
+          <th>Last Post</th>
         </tr>
       </thead>
 	<tbody>
@@ -19,26 +19,19 @@
           <tr>
             <td>
 		<a href="{% url 'work_workers' work.pk %}">{{ work.name }}</a>
-        	<small class="text-muted d-block">{{ work.description }}</small>
+        <small class="text-muted d-block">{{ work.description }}</small>
             </td>
             <td class="align-middle">{{ work.get_assignments_count }}</td>	
 		</td>
             <td class="align-middle">{{ work.workers.count }}</td>
-
             <td class="align-middle">
 		{% with assignment=work.get_last_assignment %}
-		{% if post %}
               	<small>
-                	<a href="{% url 'worker_assignments' work.pk assignment.worker.pk %}">
-                  	By {{ assignment.created_by.username }} at {{ assignment.created_at }}
-                	</a>
+                <a href="{% url 'worker_assignments' work.pk assignment.work.pk %}">
+                  By {{ assignment.created_by.username }} at {{ assignment.created_at }}
+                </a>
               	</small>
-		{% else %}
-			<small class="text-muted">
-      		<em>No assignments yet.</em>
-    			</small>
-		{% endif %}
-           {% endwith %}
+            {% endwith %}
 		</td>
           </tr>
         {% endfor %}
